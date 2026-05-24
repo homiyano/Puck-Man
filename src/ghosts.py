@@ -51,7 +51,7 @@ class Ghost(pygame.sprite.Sprite):
         self.x = self.start_col * TILE_SIZE + TILE_SIZE // 2
         self.y = (self.start_row + MAZE_ROW_OFFSET) * TILE_SIZE + TILE_SIZE // 2
 
-    def update_position(self, game_map):
+    def update_position(self, game_map, pacman=None, blinky_pos=None):
         """Standard grid-based smooth movement logic with tile interpolation."""
         if not self.is_moving:
             return
@@ -77,7 +77,7 @@ class Ghost(pygame.sprite.Sprite):
             self.row = self.target_row
             self.progress = 0.0
             self.is_moving = False
-            self.on_reach_target(game_map)
+            self.on_reach_target(game_map, pacman, blinky_pos)
         else:
             r_offset = MAZE_ROW_OFFSET
             if is_wrap_right:
@@ -128,7 +128,7 @@ class Ghost(pygame.sprite.Sprite):
             self.on_reach_target(game_map, pacman, blinky_pos)
 
         # Move smoothly
-        self.update_position(game_map)
+        self.update_position(game_map, pacman, blinky_pos)
 
     def _handle_house_logic(self, game_map):
         """Gradually float ghosts out of the ghost house based on their timers."""
