@@ -4,7 +4,7 @@ import os
 import math
 from src.settings import (
     SCREEN_WIDTH, SCREEN_HEIGHT, FPS, BG_COLOR, TEXT_COLOR,
-    PACMAN_SPEED, GHOST_SPEED, HIGHSCORE_FILE, TILE_SIZE, COLS, ROWS, MAZE_ROW_OFFSET
+    PACMAN_SPEED, PACMAN_COLOR, GHOST_SPEED, HIGHSCORE_FILE, TILE_SIZE, COLS, ROWS, MAZE_ROW_OFFSET
 )
 from src.map import Map
 from src.sound import SoundEngine
@@ -217,7 +217,7 @@ class GameController:
                 # Trigger massive particle explosion at death start frame
                 px = self.pacman.x
                 py = self.pacman.y
-                self.particles.create_death_burst(px, py, PACMAN_SPEED)
+                self.particles.create_death_burst(px, py, PACMAN_COLOR)
                 self.particles.trigger_shake(8, 25) # Heavy screen shake
             
             if self.pacman.death_timer > 55:
